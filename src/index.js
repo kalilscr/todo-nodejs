@@ -27,7 +27,7 @@ function checksExistsUserAccount(request, response, next) {
 app.post('/users', (request, response) => {
   const { username, name } = request.body;
 
-  const userExists = user.find(user => user.username === username);
+  const userExists = users.find(user => user.username === username);
 
   if(userExists) {
     return response.status(400).json({ error: 'username already exists' });
@@ -75,7 +75,7 @@ app.put('/todos/:id', checksExistsUserAccount, (request, response) => {
 
   const todo = user.todos.find(todo => todo.id === id);
 
-  if (!user) {
+  if (!todo) {
     return response.status(404).json({ error: 'todo not found' });
   }
 
